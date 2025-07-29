@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventionle</title>
+    <link rel="icon" type="image/x-icon" href="resources/favicon.ico" ✅ Leaflet CSS -- />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- ✅ Your Styles -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <!-- Overlay Container -->
+    <div id="modal-overlay" class="hidden">
+        <div id="active-modal" class="modal-content"></div>
+    </div>
+
+    <!-- Templates for each modal -->
+    <template id="settings-modal-template">
+        <div>
+            <div class="modal-title" id="settings-title">Settings</div>
+            <p>Your settings go here.</p>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </template>
+
+    <template id="account-modal-template">
+        <div>
+            <div class="modal-title" id="account-title">Account</div>
+            <p>Manage your account here.</p>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </template>
+
+    <template id="stats-modal-template">
+        <div>
+            <div class="modal-title" id="stats-title">Statistics</div>
+            <p>View your game stats here.</p>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </template>
+
+    <template id="help-modal-template">
+        <div>
+            <div class="modal-title" id="help-title">How to play</div>
+            <br />
+            <p>
+                Each day a new invention is generated. Guess when, where and by who it
+                was made
+            </p>
+            <br />
+            <p>• Place a pin on the map where the invention occured</p>
+            <p>• Estimate the year it occured</p>
+            <p>• Name the inventor</p>
+            <br />
+            <p>Scores are out of 5000:</p>
+            <p>• 2000 points for location</p>
+            <p>• 2000 points for year</p>
+            <p>• 1000 points for name</p>
+            <br />
+            <button class="modal-navigation-btn" onclick="closeModal()">
+                Got it!
+            </button>
+        </div>
+    </template>
+
+    <!-- ✅ HEADER -->
+    <div class="header">
+        <div class="header-left">
+            <div class="app-icon">
+                <img src="resources/Inventional Logo.png" class="icon" width="40px" height="40px" />
+            </div>
+            <span class="app-name">Inventionle</span>
+        </div>
+        <div class="header-right">
+            <div class="navigation-container">
+                <button id="stats-button" class="icon-button">
+                    <img src="resources/statsLogo.png" alt="Stats" />
+                </button>
+            </div>
+            <div class="navigation-container">
+                <button id="settings-button" class="icon-button">
+                    <img style="filter: invert(1)" src="resources/settingsIcon.png" alt="Settings" />
+                </button>
+            </div>
+            <div class="navigation-container">
+                <button id="help-button" class="icon-button">
+                    <img src="resources/helpIcon.png" alt="Help" />
+                </button>
+            </div>
+            <div class="navigation-container">
+                <button id="account-button" class="icon-button">
+                    <img src="resources/accountLogo.png" alt="Account" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ MAIN BODY -->
+    <div style="display: none" id="results" class="main">
+        <div class="center-column">
+            <div id="result-map" style="height: 300px; width: 100%; border-radius: 10px"></div>
+
+            <div id="score-bar" class="score-bar">Score:</div>
+
+            <div class="win-details">
+                <div class="win-detail">
+                    <label>📍 Location:</label>
+                    <div class="bar-row">
+                        <div class="bar">
+                            <div class="fill" id="location-bar" style="width: 0%"></div>
+                        </div>
+                        <div class="bar-labels">
+                            <strong id="location-answerB">New York City</strong><small id="location-answerS">Your guess:
+                                130 km away</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="win-detail">
+                    <label>📅 Year:</label>
+                    <div class="bar-row">
+                        <div class="bar">
+                            <div class="fill" id="year-bar" style="width: 0%"></div>
+                        </div>
+                        <div class="bar-labels">
+                            <strong id="year-answerB">1876</strong><small id="year-answerS">Your guess: 1823</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="win-detail">
+                    <label>👤 Name:</label>
+                    <div class="bar-row">
+                        <div class="bar">
+                            <div class="fill" id="name-bar" style="width: 0%"></div>
+                        </div>
+                        <div class="bar-labels">
+                            <strong id="person-answerB">Alexander Graham Bell</strong><small id="person-answerS">Your
+                                guess: Thomas Edison</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main" class="main">
+        <div class="center-column">
+            <div class="explanation">Today's invention is:</div>
+            <div class="prompt" id="prompt"></div>
+
+            <div id="map" style="height: 300px; width: 100%; border-radius: 10px"></div>
+
+            <div class="year-selector">
+                <button id="yearMinus1" class="year-btn">-1</button>
+                <button id="yearMinus10" class="year-btn">-10</button>
+                <input type="text" id="yearDisplay" class="year-display" value="2025" maxlength="5" inputmode="numeric"
+                    pattern="-?\d{1,4}" autocomplete="off" />
+                <button id="yearPlus10" class="year-btn">+10</button>
+                <button id="yearPlus1" class="year-btn">+1</button>
+            </div>
+
+            <div class="person-input">
+                <input id="name-input" type="text" placeholder="Who...?" />
+            </div>
+
+            <div class="guess-button">
+                <button id="guess-btn" class="guess disabled" disabled>Guess</button>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <button class="sidebar-header" id="sidebar-header"> Past Games</button>
+            <div class="sidebar-body" id="sidebar-body">
+                <ul class="game-list" id="game-list"> 
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ JS SCRIPTS IN PROPER ORDER -->
+    <!-- 1. Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="js/mapHandler.js"></script>
+    <script src="js/yearHandler.js"></script>
+    <script src="js/modalHandler.js"></script>
+    <script src="js/pastGamesHandler.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

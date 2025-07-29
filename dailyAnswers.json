@@ -1,0 +1,72 @@
+{
+    "2025-07-29": {
+        "invention": "The telephone",
+        "year": 1876,
+        "location": {
+            "lat": 42.35,
+            "lng": -71.08
+        },
+        "locationName": "Boston, Massachusetts",
+        "inventor": "Alexander Graham Bell"
+    },
+    "2025-07-30": {
+        "invention": "The light bulb",
+        "year": 1879,
+        "location": {
+            "lat": 40.56,
+            "lng": -74.34
+        },
+        "locationName": "Menlo Park, New Jersey",
+        "inventor": "Thomas Edison"
+    },
+    "2025-07-31": {
+        "invention": "The steam engine",
+        "year": 1712,
+        "location": {
+            "lat": 50.35,
+            "lng": -3.58
+        },
+        "locationName": "Dartmouth, South West England",
+        "inventor": "Thomas Newcomen"
+    },
+    "2025-08-01": {
+        "invention": "The Locomotive",
+        "year": 1804,
+        "location": {
+            "lat": 51.76,
+            "lng": -3.37
+        },
+        "locationName": "Pen-Y-Darren, Wales",
+        "inventor": "Richard Trevithick"
+    },
+    "2025-08-02": {
+        "invention": "The World Wide Web",
+        "year": 1989,
+        "location": {
+            "lat": 46.23,
+            "lng": 6.06
+        },
+        "locationName": "Geneva, Switzerland",
+        "inventor": "Tim Berners-Lee"
+    },
+    "2025-08-03": {
+        "invention": "Wifi",
+        "year": 1997,
+        "location": {
+            "lat": -35.27,
+            "lng": 149.11
+        },
+        "locationName": "Canberra, Australia",
+        "inventor": "John O'Sullivan"
+    },
+    "2025-08-04": {
+        "invention": "The Car",
+        "year": 1886,
+        "location": {
+            "lat": 49.47,
+            "lng": 8.49
+        },
+        "locationName": "Mannheim, Germany",
+        "inventor": "Carl Benz"
+    }
+}
