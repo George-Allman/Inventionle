@@ -1,11 +1,69 @@
-let todayData;
+let currentData;
 let resultMap; // Declare globally
+let data;
+const pastGamesBtn = document.getElementById("sidebar-header")
+const sidebarBody = document.getElementById("sidebar-body");
+let currentDate
 
 window.addEventListener("DOMContentLoaded", () => {
   const mainMap = initMap('map');
   resultMap = initMap('result-map'); // Save resultMap reference
   setupGuessLogic();
+  loadQuestions()
 });
+
+pastGamesBtn.addEventListener('click', () => {
+  sidebarBody.classList.toggle('active')
+});
+
+//#region Utility functions
+
+function getYesterdayDateKey() {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return d.toISOString().split("T")[0];
+}
+
+function latLngToString(latlng) {
+  return `${latlng.lat},${latlng.lng}`;
+}
+
+function stringToLatLng(str) {
+  const [lat, lng] = str.split(',').map(Number);
+  return L.latLng(lat, lng);
+}
+
+function saveScore(date, yearGuess, locationGuess, nameGuess, win) {
+  const entry = {
+    win: win,
+    year: yearGuess,
+    name: nameGuess,
+    location: { lat: locationGuess.lat, lng: locationGuess.lng }
+  };
+  localStorage.setItem(date, JSON.stringify(entry));
+
+  const streakKey = "currentStreak";
+  const lastPlayedKey = "lastPlayedDate";
+
+  if (date === getTodayDateKey()) {
+    const yesterday = getYesterdayDateKey();
+    const lastPlayed = localStorage.getItem(lastPlayedKey);
+    let currentStreak = parseInt(localStorage.getItem(streakKey)) || 0;
+
+    if (win) {
+      if (lastPlayed === yesterday) {
+        currentStreak++;
+      } else {
+        currentStreak = 1; // Reset due to break in streak
+      }
+    } else {
+      currentStreak = 0;
+    }
+
+    localStorage.setItem(streakKey, currentStreak.toString());
+    localStorage.setItem(lastPlayedKey, date); // Always update
+  }
+}
 
 function launchConfetti() {
   confetti({
@@ -15,10 +73,135 @@ function launchConfetti() {
   });
 }
 
+function getTodayDateKey() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${day}/${month}/${year}`;
+}
+
+//#endregion
+
+//#region Question Loading
+
+async function loadQuestions() {
+  try {
+    const response = await fetch('dailyAnswers.json');
+    if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+
+    data = await response.json();
+
+    todayDate = getTodayDateKey()
+
+    const ul = document.getElementById('game-list');  // get the <ul> element
+
+    for (const [date, entry] of Object.entries(data)) {
+      const [d, m, y] = date.split('/');
+      const [td, tm, ty] = getTodayDateKey().split('/');
+      const dateObj = new Date(y, m - 1, d);
+      const todayObj = new Date(ty, tm - 1, td);
+      if (dateObj > todayObj) break;
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.className = "past-game-btn"
+      btn.id = `btn-${date}`
+
+      if (localStorage.getItem(date) !== null){
+        btn.textContent = `✔ ${date}: ${entry.invention}`;
+      }
+      else{
+        btn.textContent = `${date}: ${entry.invention}`;
+      }
+      
+      btn.addEventListener('click', () => { loadInvention(date) })
+      li.append(btn)
+      ul.appendChild(li);
+    };
+
+    loadInvention(todayDate)
 
 
-function guessMade(yearGuess, locationGuess, personGuess) {
-  const distance = Math.round(locationGuess.distanceTo(todayData.location) / 1000); // in km
+  } catch (err) {
+    console.error('Error loading JSON:', err);
+  }
+}
+
+function loadInvention(date) {
+  resultMap.eachLayer((layer) => {
+  if (layer instanceof L.Marker || layer instanceof L.Polyline) {
+    resultMap.removeLayer(layer);
+  }
+});
+  const explanation = document.getElementById("explanation")
+  const yearBar = document.getElementById("year-bar");
+  const personBar = document.getElementById("name-bar");
+  const locationBar = document.getElementById("location-bar");
+  const scoreBar = document.getElementById("score-bar");
+
+
+
+
+
+  if (localStorage.getItem(date) !== null) {
+    currentData = data[date];
+    currentDate = date
+    const parsed = JSON.parse(localStorage.getItem(date));
+    const location = L.latLng(parsed.location.lat, parsed.location.lng);
+    setTimeout(() => {
+      guessMade(parsed.year, location, parsed.name, false);
+    }, 0)
+
+  }
+  else {
+    yearBar.style.transition = "0s"
+    personBar.style.transition = "0s"
+    locationBar.style.transition = "0s"
+    yearBar.style.width = '0%';
+    personBar.style.width = '0%';
+    locationBar.style.width = '0%';
+    scoreBar.textContent = 'Score: 0';
+    setTimeout(() =>{
+      yearBar.style.transition = "5.2s"
+      personBar.style.transition = "5.2s"
+      locationBar.style.transition = "5.2s"
+    }, 1)
+    currentDate = date
+    currentData = data[date];
+    document.getElementById("prompt").textContent = currentData.invention;
+    todayDate = getTodayDateKey()
+
+    if (date != todayDate) {
+      explanation.textContent = `The invention for ${date} was:`
+    }
+    else {
+      explanation.textContent = 'The invention for today is:'
+    }
+    document.getElementById("results").style.display = "none";
+    document.getElementById("main").style.display = "flex";
+    document.getElementById("yearDisplay").value = "2025"
+    document.getElementById("name-input").value = ""
+
+  }
+}
+
+//#endregion
+
+//#region Answer logic
+
+function guessMade(yearGuess, locationGuess, personGuess, firstWin) {
+  explanation = document.getElementById("result-explanation")
+  if (currentDate === getTodayDateKey()){
+    explanation.textContent = "Your score for today"
+  }
+  else{
+    explanation.textContent = `Your score for "${currentData.invention}" on ${currentDate}`
+  }
+
+  document.getElementById("results").style.display = "flex";
+  document.getElementById("main").style.display = "none";
+
+  const distance = Math.round(locationGuess.distanceTo(currentData.location) / 1000); // in km
 
   //#region Map Logic
 
@@ -29,8 +212,12 @@ function guessMade(yearGuess, locationGuess, personGuess) {
     }
   });
 
+  let constrainedLng = ((locationGuess.lng + 180) % 360 + 360) % 360 - 180;
+  const constrainedGuessLatLng = L.latLng(locationGuess.lat, constrainedLng);
+  locationGuess = constrainedGuessLatLng
+
   // Markers
-  const correctMarker = L.marker(todayData.location, {
+  const correctMarker = L.marker(currentData.location, {
     icon: L.icon({
       iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
       shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
@@ -40,6 +227,7 @@ function guessMade(yearGuess, locationGuess, personGuess) {
       shadowSize: [41, 41]
     })
   }).addTo(resultMap).bindPopup("Correct Location");
+
 
   const guessMarker = L.marker(locationGuess, {
     icon: L.icon({
@@ -53,14 +241,14 @@ function guessMade(yearGuess, locationGuess, personGuess) {
   }).addTo(resultMap).bindPopup("Your Guess");
 
   // Draw line
-  const line = L.polyline([locationGuess, todayData.location], {
+  const line = L.polyline([locationGuess, currentData.location], {
     color: 'orange',
     dashArray: '5, 10'
   }).addTo(resultMap);
 
   // Distance label (at midpoint)
-  const midLat = (locationGuess.lat + todayData.location.lat) * 0.8;
-  const midLng = (locationGuess.lng + todayData.location.lng) * 0.8;
+  const midLat = (locationGuess.lat + currentData.location.lat) * 0.8;
+  const midLng = (locationGuess.lng + currentData.location.lng) * 0.8;
 
   const distanceLabel = L.divIcon({
     className: 'distance-label',
@@ -71,8 +259,8 @@ function guessMade(yearGuess, locationGuess, personGuess) {
   L.marker([midLat, midLng], { icon: distanceLabel }).addTo(resultMap);
 
   // Fit to bounds
-  const bounds = L.latLngBounds([locationGuess, todayData.location]);
-  resultMap.fitBounds(bounds, { animate: true, duration: 4 });
+  const bounds = L.latLngBounds([locationGuess, currentData.location]);
+  setTimeout(() => resultMap.fitBounds(bounds, { animate: true, duration: 1 }), 300);
 
   setTimeout(() => resultMap.invalidateSize(), 200);
 
@@ -91,7 +279,7 @@ function guessMade(yearGuess, locationGuess, personGuess) {
 
   const yearWeighting = 20
 
-  var yearDifference = Math.abs(yearGuess - todayData.year)
+  var yearDifference = Math.abs(yearGuess - currentData.year)
 
   var yearScore = Math.max((2000 - yearDifference * yearWeighting), 0)
 
@@ -155,27 +343,27 @@ function guessMade(yearGuess, locationGuess, personGuess) {
 
   //#endregion
 
-  console.log("Hello");
 
-
-  personScore = getNameScore(todayData.inventor, personGuess)
+  personScore = getNameScore(currentData.inventor, personGuess)
 
   score = yearScore + distanceScore + personScore
 
   score = Math.round(score)
 
-  if (score > 3600) {
-    launchConfetti()
-  }
-  else {
-    document.getElementById("score-bar").classList.add("shake");
-    document.getElementById("result-map").classList.add("shake")
+  if(firstWin){
+    if (score > 3500) {
+        launchConfetti()
+      }
+      else {
+        document.getElementById("score-bar").classList.add("shake");
+        document.getElementById("result-map").classList.add("shake")
 
-    setTimeout(() => {
-      document.getElementById("score-bar").classList.remove("shake");
-      document.getElementById("result-map").classList.remove("shake")
-    }, 500);
-  }
+        setTimeout(() => {
+          document.getElementById("score-bar").classList.remove("shake");
+          document.getElementById("result-map").classList.remove("shake")
+        }, 500);
+      }
+  } 
 
   //document.getElementById("score-bar").textContent = String(score)
 
@@ -187,13 +375,13 @@ function guessMade(yearGuess, locationGuess, personGuess) {
   const nameAnswerlblS = document.getElementById("person-answerS")
   const locationAnswerlblS = document.getElementById("location-answerS")
 
-  yearAnswerlblB.textContent = String(todayData.year)
+  yearAnswerlblB.textContent = String(currentData.year)
   yearAnswerlblS.textContent = 'Your answer: ' + yearGuess
 
-  nameAnswerlblB.textContent = todayData.inventor
+  nameAnswerlblB.textContent = currentData.inventor
   nameAnswerlblS.textContent = 'Your answer: ' + personGuess
 
-  locationAnswerlblB.textContent = todayData.locationName
+  locationAnswerlblB.textContent = currentData.locationName
   locationAnswerlblS.textContent = 'Your answer was ' + distance + 'kms away'
 
   const yearBar = document.getElementById("year-bar")
@@ -205,6 +393,7 @@ function guessMade(yearGuess, locationGuess, personGuess) {
   locationAmount = Math.round(distanceScore / 20)
 
   yearAmount = Math.round(yearScore / 20)
+
 
   function animateNumber(id, endValue, duration = 1000) {
     const el = document.getElementById(id);
@@ -225,7 +414,24 @@ function guessMade(yearGuess, locationGuess, personGuess) {
     requestAnimationFrame(step);
   }
 
-  animateNumber("score-bar", score, 5200)
+  if (firstWin){
+    animateNumber("score-bar", score, 5200)
+  }
+  else{
+    document.getElementById("score-bar").textContent = "Score: " + score
+  }
+
+
+  if (firstWin){
+    locationBar.style.transition = "5.2s"
+    personBar.style.transition = "5.2s"
+    yearBar.style.transition = "5.2s"
+  }
+  else{
+    locationBar.style.transition = "0s"
+    personBar.style.transition = "0s"
+    yearBar.style.transition = "0s"
+  }
 
   setTimeout(() => {
     locationBar.style.width = String(locationAmount) + '%'
@@ -233,8 +439,27 @@ function guessMade(yearGuess, locationGuess, personGuess) {
     yearBar.style.width = String(yearAmount) + '%'
   }, 100)
 
+  if (score > 3500) {
+    win = true
+  }
+  else {
+    win = false
+  }
+
+  if (localStorage.getItem(currentDate) == null) {
+    saveScore(currentDate, yearGuess, locationGuess, personGuess, win)
+    const targetBtn = document.getElementById(`btn-${currentDate}`)
+    if (targetBtn) {
+      targetBtn.textContent = "✔ " + targetBtn.textContent
+    }
+  }
+
 }
 
+
+//#endregion
+
+//#region Initializing
 
 function setupGuessLogic() {
   const guessButton = document.getElementById("guess-btn");
@@ -263,43 +488,15 @@ function setupGuessLogic() {
     const locationGuess = getMarkerLatLng();
     const yearGuess = yearInput.value.trim();
     const nameGuess = nameInput.value.trim();
-
-    document.getElementById("results").style.display = "flex";
-    document.getElementById("main").style.display = "none";
-
-    guessMade(yearGuess, locationGuess, nameGuess);
+    guessMade(yearGuess, locationGuess, nameGuess, true);
   });
 
   updateGuessButtonState(); // Run initially
 }
+//#endregion
 
-function getTodayDateKey() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-
-async function loadTodayInvention() {
-  const dateKey = getTodayDateKey();
-
-  try {
-    const response = await fetch('dailyAnswers.json');
-    if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-
-    const data = await response.json();
-
-    if (data[dateKey]) {
-      todayData = data[dateKey];
-      document.getElementById("prompt").textContent = todayData.invention;
-    } else {
-      console.warn("No data found for today's date in JSON.");
-    }
-  } catch (err) {
-    console.error('Error loading JSON:', err);
+document.getElementById('name-input').addEventListener('keydown', (e) => {
+  if (e.key === '_') {
+    e.preventDefault();
   }
-}
-
-
-window.addEventListener('DOMContentLoaded', loadTodayInvention);
+});

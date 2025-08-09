@@ -11,6 +11,18 @@
   --valid-green-hover: #53b83f;
   --valid-green-click: #368227;
   --invalid-gray: #888888;
+  --login-field: #ffffff;
+  --score-slider: #444;
+}
+
+body.light-theme {
+  --fore-color: #212121;
+  --background-color: #ffffff;
+  --fore-color-hover: #b5b5b5;
+  --header-color: #f2f2f2;
+  --header-color-hover: #c8c8c8;
+  --login-field: #e7e7e7;
+  --score-slider: #c2c2c2;
 }
 
 p {
@@ -23,17 +35,165 @@ p {
   padding: 0;
   box-sizing: border-box;
 }
-html, body {
+
+html,
+body {
   width: 100%;
   height: 100%;
   background-color: var(--background-color);
   font-family: 'Segoe UI', sans-serif;
-  color: white;
+  color: var(--fore-color);
+}
+
+@media (max-width: 900px) {
+  .sidebar{
+    display: flex;
+    max-width: 230px;
+    width: 100%;
+    flex-direction: column;
+    gap: 0px;
+    bottom: 1px;
+  }
+  .sidebar-header{
+    color: black;
+  }
 }
 
 .hidden {
   display: none;
 }
+
+/*#region account&stats */
+
+.text-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--fore-color);
+  /* Link color */
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  /* Use parent font */
+}
+
+.text-button:hover {
+  color: var(--fore-color);
+}
+
+.login-text {
+  text-align: center;
+  font-size: 16px;
+}
+
+.log-in-field {
+  background-color: var(--login-field);
+  color: black;
+  border: none;
+  border-radius: 8px;
+  height: 30px;
+  width: 300px;
+  font-size: 14px;
+  text-align: left;
+  padding-left: 10px;
+  appearance: textfield;
+}
+
+.log-in-field:focus {
+  outline: none;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat .number {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.stat .label {
+  font-size: 0.9rem;
+  color: var(--fore-color)
+}
+
+/*#endregion */
+
+/*#region toggle-switch */
+
+.settings-bar {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.settings-toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-top: 3px;
+}
+
+/* Hide default HTML checkbox */
+.settings-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+input:checked+.slider {
+  background-color: var(--primary-color);
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 0px var(--primary-color);
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/*#endregion */
 
 /*#region Modals */
 
@@ -43,7 +203,8 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Darken */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Darken */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,7 +219,7 @@ html, body {
   background-color: var(--background-color);
   padding: 30px 40px;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   width: 400px;
   max-width: 90%;
   text-align: center;
@@ -71,14 +232,14 @@ html, body {
 .modal-title {
   font-size: 30px;
   font-weight: 500;
-  margin:  0px;
+  margin: 0px;
   text-align: center;
 }
 
 .modal-text {
   font-size: 18px;
   font-weight: 500;
-  margin:  0px;
+  margin: 0px;
   text-align: left;
 }
 
@@ -109,7 +270,8 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.85); /* semi-transparent overlay */
+  background-color: rgba(0, 0, 0, 0.85);
+  /* semi-transparent overlay */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,7 +284,7 @@ html, body {
 
 .score-bar {
   background-color: var(--primary-color);
-  color: var(--fore-color);
+  color: white;
   border-radius: 18px;
   width: 500px;
   height: 50px;
@@ -138,7 +300,7 @@ html, body {
   padding: 30px;
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   color: var(--fore-color);
   text-align: center;
   animation: fadeIn 0.5s ease-in-out;
@@ -165,19 +327,21 @@ html, body {
 .win-detail label {
   font-weight: bold;
   display: block;
-  margin-bottom: 2px; /* reduced gap */
+  margin-bottom: 2px;
+  /* reduced gap */
 }
 
 .bar-row {
   display: flex;
   align-items: flex-start;
-  gap: 12px; /* tighter gap */
+  gap: 12px;
+  /* tighter gap */
 }
 
 .bar {
   width: 500px;
   height: 12px;
-  background-color: #444;
+  background-color: var(--score-slider);
   border-radius: 6px;
   overflow: hidden;
   flex-shrink: 0;
@@ -197,7 +361,8 @@ html, body {
   line-height: 1.2;
   white-space: nowrap;
   margin-top: -9px;
-  gap: 1px; /* tight spacing between strong and small */
+  gap: 1px;
+  /* tight spacing between strong and small */
 }
 
 .bar-labels strong {
@@ -221,6 +386,7 @@ html, body {
   align-items: center;
   padding: 0px 0px;
 }
+
 .header-left {
   display: flex;
   align-items: center;
@@ -266,9 +432,9 @@ html, body {
   text-align: center;
 }
 
-.navigation-container:hover{
+.navigation-container:hover {
   background-color: var(--header-color-hover);
-  
+
 }
 
 /*#endregion */
@@ -318,7 +484,7 @@ html, body {
 
 .sidebar-header {
   background-color: var(--primary-color);
-  color: var(--fore-color);
+  color: white;
   border: 4px solid var(--primary-color);
   border-radius: 16px;
   padding: 10px;
@@ -328,6 +494,16 @@ html, body {
   width: 100%;
   z-index: 1000;
   position: relative;
+}
+
+.sidebar-header:hover {
+  background-color: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
+}
+
+.sidebar-header:active {
+  background-color: var(--primary-color-click);
+  border-color: var(--primary-color-click);
 }
 
 .game-list {
@@ -353,8 +529,10 @@ html, body {
 }
 
 .sidebar-body.active {
-  height: 400px; /* Adjust this to fit content or max height */
+  height: 400px;
+  /* Adjust this to fit content or max height */
 }
+
 .sidebar-body::-webkit-scrollbar {
   width: 4px;
   margin-right: -10px;
@@ -369,19 +547,18 @@ html, body {
   margin-bottom: 0px;
   padding: 1px;
   font-size: 14px;
-  background-color: var(--fore-color);
+  background-color: white;
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;
   width: 100%;
-  background-color: var(--fore-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   border: var(--fore-color);
 }
 
-.past-game-btn:hover{
+.past-game-btn:hover {
   background-color: var(--fore-color-hover);
 
 
@@ -396,7 +573,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 30px;
+  padding: 20px;
   gap: 40px;
 }
 
@@ -405,27 +582,30 @@ html, body {
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  margin: 0px;
+  max-width: 500px;
+  width: 100%;
 }
 
 .explanation {
   font-size: 18px;
   font-weight: 500;
-  margin:  0px;
+  margin: 0px;
   text-align: center;
 }
 
 .prompt {
   font-size: 30px;
   font-weight: 500;
-  margin:  10px;
+  margin: 10px;
   margin-bottom: 50px;
   text-align: center;
 }
 
 .year-selector {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  width: 500px;
+  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
   gap: 10px;
   align-items: stretch;
 }
@@ -435,10 +615,12 @@ html, body {
   color: white;
   border: none;
   border-radius: 8px;
+  width: 100%;
   height: 50px;
   font-size: 18px;
   text-align: center;
   appearance: textfield;
+  grid-column: span 2;
 }
 
 /* Remove spinner buttons in Chrome/Safari */
@@ -455,14 +637,17 @@ html, body {
   cursor: pointer;
   font-size: 18px;
   border-radius: 10px;
+  grid-column: span 1;
 }
 
 .year-btn:hover {
-  background-color: var(--primary-color-hover); /* slightly lighter or more vibrant orange */
+  background-color: var(--primary-color-hover);
+  /* slightly lighter or more vibrant orange */
 }
 
 .year-btn:active {
-  background-color: var(--primary-color-click); /* darker orange on click */
+  background-color: var(--primary-color-click);
+  /* darker orange on click */
 }
 
 .year-display {
@@ -472,7 +657,8 @@ html, body {
 
 .year-display:focus {
   outline: none;
-  box-shadow: 0 0 0 1px var(--fore-color); /* or a soft glow */
+  box-shadow: 0 0 0 1px var(--fore-color);
+  /* or a soft glow */
 }
 
 /* Input */
@@ -482,26 +668,36 @@ html, body {
   border-radius: 10px;
   border: 4px solid var(--primary-color);
   font-size: 14px;
-  width: 500px;
+  width: 100%;
   height: 50px;
+  max-width: 500px;
   text-align: center;
+}
+
+.person-input{
+  width: 100%;
 }
 
 .person-input input:focus {
   outline: none;
-  box-shadow: 0 0 0 1px var(--fore-color); /* or a soft glow */
+  box-shadow: 0 0 0 1px var(--fore-color);
+  /* or a soft glow */
 }
 
 .guess-button .guess {
   padding: 10px 40px;
   font-size: 18px;
-  width: 500px;
+  width: 100%;
   height: 50px;
   background-color: var(--valid-green);
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.guess-button {
+  width: 100%;
 }
 
 .guess-button .guess:active {
@@ -515,7 +711,8 @@ html, body {
 .guess-button .guess.disabled {
   padding: 10px 40px;
   font-size: 18px;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   height: 50px;
   color: white;
   background-color: var(--invalid-gray);
@@ -529,19 +726,45 @@ html, body {
 /*#region Animations*/
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-10px); }
-  40%, 80% { transform: translateX(10px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-10px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(10px);
+  }
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; transform: scale(1); }
-  to   { opacity: 0; transform: scale(0.9); }
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
 }
 
 .shake {
@@ -564,8 +787,6 @@ html, body {
 }
 
 #play-again-btn:hover {
-  background-color: #ff6a00; /* Slightly lighter orange */
+  background-color: #ff6a00;
+  /* Slightly lighter orange */
 }
-
-
-
