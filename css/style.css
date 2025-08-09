@@ -45,18 +45,10 @@ body {
   color: var(--fore-color);
 }
 
-@media (max-width: 900px) {
-  .sidebar{
-    display: flex;
-    max-width: 230px;
-    width: 100%;
-    flex-direction: column;
-    gap: 0px;
-    bottom: 1px;
-  }
-  .sidebar-header{
-    color: black;
-  }
+
+.donation{
+  justify-self: center;
+  margin: 30px;
 }
 
 .hidden {
@@ -286,7 +278,8 @@ input:checked+.slider:before {
   background-color: var(--primary-color);
   color: white;
   border-radius: 18px;
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
   height: 50px;
   text-align: center;
   padding: 6px;
@@ -314,7 +307,8 @@ input:checked+.slider:before {
 
 .win-detail {
   margin-bottom: 12px;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
 }
 
 .win-details {
@@ -322,6 +316,8 @@ input:checked+.slider:before {
   flex-direction: column;
   gap: 0px;
   margin-top: 0px;
+  width: 100%;
+  max-width: 500px;
 }
 
 .win-detail label {
@@ -336,16 +332,19 @@ input:checked+.slider:before {
   align-items: flex-start;
   gap: 12px;
   /* tighter gap */
+  max-width: 500px;
+  width: 100%;
 }
 
 .bar {
-  width: 500px;
   height: 12px;
   background-color: var(--score-slider);
   border-radius: 6px;
   overflow: hidden;
   flex-shrink: 0;
   margin-top: 2px;
+  max-width: 500px;
+  width: 100%;
 }
 
 .fill {
@@ -442,7 +441,8 @@ input:checked+.slider:before {
 /*#region Map */
 
 .map-placeholder {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   height: 300px;
   border-radius: 14px;
   overflow: hidden;
@@ -475,11 +475,16 @@ input:checked+.slider:before {
 .sidebar {
   width: 230px;
   position: absolute;
-  right: 30px;
-  top: 80px;
+  left: 50%;
+  transform: translate(-50%);
+  margin: 20px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   gap: 0px;
+  z-index: 9999;
 }
 
 .sidebar-header {
@@ -535,7 +540,6 @@ input:checked+.slider:before {
 
 .sidebar-body::-webkit-scrollbar {
   width: 4px;
-  margin-right: -10px;
 }
 
 .sidebar-body::-webkit-scrollbar-thumb {
@@ -568,12 +572,16 @@ input:checked+.slider:before {
 /*#endregion */
 
 /*#region Main Content*/
+.layout{
+  padding: 20px;
+  position: relative;
+}
 
 .main {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 20px;
+  position: relative;
   gap: 40px;
 }
 
@@ -789,4 +797,28 @@ input:checked+.slider:before {
 #play-again-btn:hover {
   background-color: #ff6a00;
   /* Slightly lighter orange */
+}
+
+@media (max-width: 900px){
+  .bar {
+    display: flex;
+    max-width: 500px;
+    width: 100%;
+    height: 12px;
+    background-color: var(--score-slider);
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 100;
+    margin-top: 2px;
+  }
+}
+
+
+.donation-button{
+  all: unset;            /* Remove all default button styles */
+  text-decoration: underline;
+  color: inherit;        /* Inherit text color from parent */
+  cursor: pointer;       /* Pointer cursor on hover */
+  font: inherit;         /* Inherit font styles from parent */
+  display: inline;       /* Inline to sit with text */
 }

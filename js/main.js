@@ -41,28 +41,6 @@ function saveScore(date, yearGuess, locationGuess, nameGuess, win) {
     location: { lat: locationGuess.lat, lng: locationGuess.lng }
   };
   localStorage.setItem(date, JSON.stringify(entry));
-
-  const streakKey = "currentStreak";
-  const lastPlayedKey = "lastPlayedDate";
-
-  if (date === getTodayDateKey()) {
-    const yesterday = getYesterdayDateKey();
-    const lastPlayed = localStorage.getItem(lastPlayedKey);
-    let currentStreak = parseInt(localStorage.getItem(streakKey)) || 0;
-
-    if (win) {
-      if (lastPlayed === yesterday) {
-        currentStreak++;
-      } else {
-        currentStreak = 1; // Reset due to break in streak
-      }
-    } else {
-      currentStreak = 0;
-    }
-
-    localStorage.setItem(streakKey, currentStreak.toString());
-    localStorage.setItem(lastPlayedKey, date); // Always update
-  }
 }
 
 function launchConfetti() {
