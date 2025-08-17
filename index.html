@@ -85,6 +85,10 @@
             <div class="number" id="win-stat">89</div>
             <div class="label">Win %</div>
           </div>
+          <div class="stat">
+            <div class="number" id="avg-stat">89</div>
+            <div class="label">Average <br> Score</div>
+          </div>
           <!-- <div class="stat">
             <div class="number" id="streak-stat">0</div>
             <div class="label">Streak</div>
@@ -263,7 +267,15 @@
         </div>
       </div>
 
-      <div class="donation">
+
+      <div class="sidebar">
+        <button class="sidebar-header" id="sidebar-header">Past Games</button>
+        <div class="sidebar-body" id="sidebar-body">
+          <ul class="game-list" id="game-list"></ul>
+        </div>
+      </div>
+
+            <div class="donation">
         <p>
           To keep the game ad free and maintained, please&nbsp;<button
             class="donation-button"
@@ -274,12 +286,6 @@
         </p>
       </div>
 
-      <div class="sidebar">
-        <button class="sidebar-header" id="sidebar-header">Past Games</button>
-        <div class="sidebar-body" id="sidebar-body">
-          <ul class="game-list" id="game-list"></ul>
-        </div>
-      </div>
     </div>
 
     <!-- ✅ JS SCRIPTS IN PROPER ORDER -->
@@ -289,7 +295,6 @@
     <script src="js/mapHandler.js"></script>
     <script src="js/donationHandler.js"></script>
     <script src="js/yearHandler.js"></script>
-    <script src="js/statsHandler.js"></script>
     <script src="js/modalHandler.js"></script>
     <script src="js/main.js"></script>
   </body>

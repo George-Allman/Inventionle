@@ -30,14 +30,14 @@ function showModal(modalId) {
           if (toggle.checked) {
             document.getElementById("settings-button").style.filter = "invert(1)"
             document.getElementById("stats-button").style.filter = "invert(1)"
-            document.getElementById("account-button").style.filter = "invert(1)"
             document.getElementById("help-button").style.filter = "invert(1)"
+            localStorage.setItem("theme", "light")
           }
           else {
             document.getElementById("settings-button").style.filter = "invert(0)"
             document.getElementById("stats-button").style.filter = "invert(0)"
-            document.getElementById("account-button").style.filter = "invert(0)"
             document.getElementById("help-button").style.filter = "invert(0)"
+            localStorage.setItem("theme", "dark")
           }
 
         });
@@ -47,10 +47,12 @@ function showModal(modalId) {
     if (modalId === "stats-modal") {
       const played = document.getElementById("played-stat");
       const win = document.getElementById("win-stat");
+      const avg = document.getElementById("avg-stat");
       //const streak = document.getElementById("streak-stat");
 
-      let nPlayed = localStorage.length;
+      let nPlayed = localStorage.length - 1;
       let winCount = 0;
+      let scoreSum = 0;
       const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Matches YYYY-MM-DD
 
       for (let i = 0; i < localStorage.length; i++) {
@@ -63,6 +65,8 @@ function showModal(modalId) {
             if (entry.win) {
               winCount++
             }
+            scoreSum += entry.score
+            
           }
         } catch (e) {
           // ignore invalid JSON
@@ -71,7 +75,9 @@ function showModal(modalId) {
 
       // ✅ Handle divide by zero
       const winPct = Math.round((winCount / nPlayed) * 100)
+      const avgScore = Math.round(scoreSum/nPlayed)
 
+      avg.textContent = avgScore;
       win.textContent = winPct;
       played.textContent = nPlayed;
       //streak.textContent = localStorage.getItem("currentStreak") || 0;

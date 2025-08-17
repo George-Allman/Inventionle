@@ -4,13 +4,12 @@ const MAX_YEAR = 2025;
 
 // Utility: test if a string is valid year format and within range
 function isValidYearString(str) {
-  if (str === '') return true; // allow empty during typing
-  if (!/^[-]?\d{0,4}$/.test(str)) return false; // invalid format
+  if (str === '') return true;        // allow empty while typing
+  if (str === '-') return true;       // allow lone '-' while typing
 
-  // Parse number ignoring empty string or lone '-'
-  const num = parseInt(str, 10);
-  if (isNaN(num)) return false;
+  if (!/^-?\d{1,4}$/.test(str)) return false; // must be digits with optional leading '-'
 
+  const num = Number(str);
   return num >= MIN_YEAR && num <= MAX_YEAR;
 }
 

@@ -10,7 +10,28 @@ window.addEventListener("DOMContentLoaded", () => {
   resultMap = initMap('result-map'); // Save resultMap reference
   setupGuessLogic();
   loadQuestions()
+  if (localStorage.getItem("theme") == null) {
+    localStorage.setItem("theme", "dark")
+  }
+  else {
+    let theme = localStorage.getItem("theme")
+    applyTheme(theme);
+  }
 });
+
+function applyTheme(theme) {
+  if (theme === "light") {
+    document.body.classList.add("light-theme");
+    document.getElementById("settings-button").style.filter = "invert(1)";
+    document.getElementById("stats-button").style.filter = "invert(1)";
+    document.getElementById("help-button").style.filter = "invert(1)";
+  } else {
+    document.body.classList.remove("light-theme");
+    document.getElementById("settings-button").style.filter = "invert(0)";
+    document.getElementById("stats-button").style.filter = "invert(0)";
+    document.getElementById("help-button").style.filter = "invert(0)";
+  }
+}
 
 pastGamesBtn.addEventListener('click', () => {
   sidebarBody.classList.toggle('active')
@@ -33,11 +54,12 @@ function stringToLatLng(str) {
   return L.latLng(lat, lng);
 }
 
-function saveScore(date, yearGuess, locationGuess, nameGuess, win) {
+function saveScore(date, yearGuess, locationGuess, nameGuess, score, win) {
   const entry = {
     win: win,
     year: yearGuess,
     name: nameGuess,
+    score: score,
     location: { lat: locationGuess.lat, lng: locationGuess.lng }
   };
   localStorage.setItem(date, JSON.stringify(entry));
@@ -85,13 +107,13 @@ async function loadQuestions() {
       btn.className = "past-game-btn"
       btn.id = `btn-${date}`
 
-      if (localStorage.getItem(date) !== null){
+      if (localStorage.getItem(date) !== null) {
         btn.textContent = `✔ ${date}: ${entry.invention}`;
       }
-      else{
+      else {
         btn.textContent = `${date}: ${entry.invention}`;
       }
-      
+
       btn.addEventListener('click', () => { loadInvention(date) })
       li.append(btn)
       ul.appendChild(li);
@@ -106,16 +128,21 @@ async function loadQuestions() {
 }
 
 function loadInvention(date) {
+  setTimeout(() => {
   resultMap.eachLayer((layer) => {
-  if (layer instanceof L.Marker || layer instanceof L.Polyline) {
-    resultMap.removeLayer(layer);
-  }
-});
+    if (layer instanceof L.Marker || layer instanceof L.Polyline) {
+      resultMap.removeLayer(layer);
+    }
+  });
+  }, 0)
+
+
   const explanation = document.getElementById("explanation")
   const yearBar = document.getElementById("year-bar");
   const personBar = document.getElementById("name-bar");
   const locationBar = document.getElementById("location-bar");
   const scoreBar = document.getElementById("score-bar");
+
 
 
 
@@ -139,7 +166,7 @@ function loadInvention(date) {
     personBar.style.width = '0%';
     locationBar.style.width = '0%';
     scoreBar.textContent = 'Score: 0';
-    setTimeout(() =>{
+    setTimeout(() => {
       yearBar.style.transition = "5.2s"
       personBar.style.transition = "5.2s"
       locationBar.style.transition = "5.2s"
@@ -160,7 +187,14 @@ function loadInvention(date) {
     document.getElementById("yearDisplay").value = "2025"
     document.getElementById("name-input").value = ""
 
+
   }
+
+
+    updateGuessButtonState();
+
+  
+  
 }
 
 //#endregion
@@ -168,11 +202,17 @@ function loadInvention(date) {
 //#region Answer logic
 
 function guessMade(yearGuess, locationGuess, personGuess, firstWin) {
+  resultMap.eachLayer((layer) => {
+    if (layer instanceof L.Marker || layer instanceof L.Polyline) {
+      resultMap.removeLayer(layer);
+    }
+  });
+
   explanation = document.getElementById("result-explanation")
-  if (currentDate === getTodayDateKey()){
+  if (currentDate === getTodayDateKey()) {
     explanation.textContent = "Your score for today"
   }
-  else{
+  else {
     explanation.textContent = `Your score for "${currentData.invention}" on ${currentDate}`
   }
 
@@ -184,11 +224,6 @@ function guessMade(yearGuess, locationGuess, personGuess, firstWin) {
   //#region Map Logic
 
   // Clear old layers if needed
-  resultMap.eachLayer((layer) => {
-    if (layer instanceof L.Marker || layer instanceof L.Polyline) {
-      resultMap.removeLayer(layer);
-    }
-  });
 
   let constrainedLng = ((locationGuess.lng + 180) % 360 + 360) % 360 - 180;
   const constrainedGuessLatLng = L.latLng(locationGuess.lat, constrainedLng);
@@ -224,17 +259,7 @@ function guessMade(yearGuess, locationGuess, personGuess, firstWin) {
     dashArray: '5, 10'
   }).addTo(resultMap);
 
-  // Distance label (at midpoint)
-  const midLat = (locationGuess.lat + currentData.location.lat) * 0.8;
-  const midLng = (locationGuess.lng + currentData.location.lng) * 0.8;
 
-  const distanceLabel = L.divIcon({
-    className: 'distance-label',
-    html: `<div style="font-size:15px; color:black;">${distance} km</div>`,
-    iconAnchor: [0, 0]
-  });
-
-  L.marker([midLat, midLng], { icon: distanceLabel }).addTo(resultMap);
 
   // Fit to bounds
   const bounds = L.latLngBounds([locationGuess, currentData.location]);
@@ -328,20 +353,20 @@ function guessMade(yearGuess, locationGuess, personGuess, firstWin) {
 
   score = Math.round(score)
 
-  if(firstWin){
+  if (firstWin) {
     if (score > 3500) {
-        launchConfetti()
-      }
-      else {
-        document.getElementById("score-bar").classList.add("shake");
-        document.getElementById("result-map").classList.add("shake")
+      launchConfetti()
+    }
+    else {
+      document.getElementById("score-bar").classList.add("shake");
+      document.getElementById("result-map").classList.add("shake")
 
-        setTimeout(() => {
-          document.getElementById("score-bar").classList.remove("shake");
-          document.getElementById("result-map").classList.remove("shake")
-        }, 500);
-      }
-  } 
+      setTimeout(() => {
+        document.getElementById("score-bar").classList.remove("shake");
+        document.getElementById("result-map").classList.remove("shake")
+      }, 500);
+    }
+  }
 
   //document.getElementById("score-bar").textContent = String(score)
 
@@ -392,20 +417,20 @@ function guessMade(yearGuess, locationGuess, personGuess, firstWin) {
     requestAnimationFrame(step);
   }
 
-  if (firstWin){
+  if (firstWin) {
     animateNumber("score-bar", score, 5200)
   }
-  else{
+  else {
     document.getElementById("score-bar").textContent = "Score: " + score
   }
 
 
-  if (firstWin){
+  if (firstWin) {
     locationBar.style.transition = "5.2s"
     personBar.style.transition = "5.2s"
     yearBar.style.transition = "5.2s"
   }
-  else{
+  else {
     locationBar.style.transition = "0s"
     personBar.style.transition = "0s"
     yearBar.style.transition = "0s"
@@ -425,7 +450,7 @@ function guessMade(yearGuess, locationGuess, personGuess, firstWin) {
   }
 
   if (localStorage.getItem(currentDate) == null) {
-    saveScore(currentDate, yearGuess, locationGuess, personGuess, win)
+    saveScore(currentDate, yearGuess, locationGuess, personGuess, score, win)
     const targetBtn = document.getElementById(`btn-${currentDate}`)
     if (targetBtn) {
       targetBtn.textContent = "✔ " + targetBtn.textContent
@@ -439,24 +464,29 @@ function guessMade(yearGuess, locationGuess, personGuess, firstWin) {
 
 //#region Initializing
 
+function updateGuessButtonState() {
+  const guessButton = document.getElementById("guess-btn");
+  const nameInput = document.getElementById("name-input");
+  const yearInput = document.getElementById("yearDisplay");
+  const nameValid = nameInput.value.trim() !== '';
+  const yearValid = yearInput.value.trim() !== '';
+  const markerPlaced = hasGuessBeenPlaced();
+
+  if (markerPlaced && nameValid && yearValid) {
+    guessButton.disabled = false;
+    guessButton.classList.remove("disabled");
+  } else {
+    guessButton.disabled = true;
+    guessButton.classList.add("disabled");
+  }
+}
+
 function setupGuessLogic() {
   const guessButton = document.getElementById("guess-btn");
   const nameInput = document.getElementById("name-input");
   const yearInput = document.getElementById("yearDisplay");
 
-  function updateGuessButtonState() {
-    const nameValid = nameInput.value.trim() !== '';
-    const yearValid = yearInput.value.trim() !== '';
-    const markerPlaced = hasGuessBeenPlaced();
 
-    if (markerPlaced && nameValid && yearValid) {
-      guessButton.disabled = false;
-      guessButton.classList.remove("disabled");
-    } else {
-      guessButton.disabled = true;
-      guessButton.classList.add("disabled");
-    }
-  }
 
   nameInput.addEventListener("input", updateGuessButtonState);
   yearInput.addEventListener("input", updateGuessButtonState);

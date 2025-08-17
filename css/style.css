@@ -48,7 +48,7 @@ body {
 
 .donation{
   justify-self: center;
-  margin: 30px;
+  margin: 0px;
 }
 
 .hidden {
@@ -473,18 +473,15 @@ input:checked+.slider:before {
 /*#region Sidebar*/
 
 .sidebar {
-  width: 230px;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
-  margin: 20px;
+  margin-top: 50px;
   width: 100%;
   max-width: 300px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   gap: 0px;
   z-index: 9999;
+  justify-self: center;
 }
 
 .sidebar-header {
@@ -525,8 +522,9 @@ input:checked+.slider:before {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
   height: 32px;
+  position: relative;
+  translate: 0px -50px;
   transition: height 0.5s ease;
-  position: absolute;
   top: 14px;
   width: 100%;
   z-index: 1;
@@ -575,6 +573,7 @@ input:checked+.slider:before {
 .layout{
   padding: 20px;
   position: relative;
+  background-color: var(--background-color);
 }
 
 .main {
@@ -813,6 +812,45 @@ input:checked+.slider:before {
   }
 }
 
+@media (max-width: 350px){
+   .app-name {
+  font-size: 12px;
+  font-weight: bold;
+  padding-bottom: 3px;
+}
+.app-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+}
+.icon-button {
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.icon-button img {
+  width: 30px;
+  height: 30px;
+  color: white;
+}
+
+.header-right {
+  padding: 0px;
+}
+.navigation-container {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
+}
 
 .donation-button{
   all: unset;            /* Remove all default button styles */
