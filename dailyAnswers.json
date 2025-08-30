@@ -78,5 +78,85 @@
         },
         "locationName": "Paris, France",
         "inventor": "Montgolifer brothers"
+    },
+    "25/08/2025": {
+        "invention": "Calculus",
+        "year": 1666,
+        "location": {
+            "lat": 52.81,
+            "lng": -0.63
+        },
+        "locationName": "Woolsthorpe, England",
+        "inventor": "Isaac Newton"
+    },
+    "26/08/2025": {
+        "invention": "Dynamite",
+        "year": 1867,
+        "location": {
+            "lat": 53.43,
+            "lng": 10.37
+        },
+        "locationName": "Geesthact, Germany",
+        "inventor": "Alfred Nobel"
+    },
+    "27/08/2025": {
+        "invention": "Nylon",
+        "year": 1935,
+        "location": {
+            "lat": 39.77,
+            "lng": -75.57
+        },
+        "locationName": "Wilmington, Delware",
+        "inventor": "Wallace Carothers"
+    },
+    "28/08/2025": {
+        "invention": "The Radio",
+        "year": 1895,
+        "location": {
+            "lat": 44.43,
+            "lng": 11.26
+        },
+        "locationName": "Bologna, Italy",
+        "inventor": "Guglielmo Marconi"
+    },
+    "29/08/2025": {
+        "invention": "Penicillin",
+        "year": 1928,
+        "location": {
+            "lat": 51.52,
+            "lng": -0.17
+        },
+        "locationName": "London, England",
+        "inventor": "Alexander Fleming"
+    },
+    "30/08/2025": {
+        "invention": "The telescope",
+        "year": 1608,
+        "location": {
+            "lat": 51.50,
+            "lng": 3.61
+        },
+        "locationName": "Middelburg, Netherlands",
+        "inventor": "Hans Lippershey"
+    },
+    "31/08/2025": {
+        "invention": "Nitrogen fixation",
+        "year": 1909,
+        "location": {
+            "lat": 49.01,
+            "lng": 8.42
+        },
+        "locationName": "Karlsruhe, Germany",
+        "inventor": "Fritz Haber"
+    },
+    "01/09/2025": {
+        "invention": "The atomic bomb",
+        "year": 1945,
+        "location": {
+            "lat": 35.88,
+            "lng": -106.32
+        },
+        "locationName": "Los Alamos, New Mexico",
+        "inventor": "Robert Oppenheimer"
     }
 }
