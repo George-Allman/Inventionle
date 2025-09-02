@@ -482,6 +482,8 @@ input:checked+.slider:before {
   gap: 0px;
   z-index: 9999;
   justify-self: center;
+  align-self: center;
+  align-items: center;
 }
 
 .sidebar-header {
