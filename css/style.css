@@ -48,6 +48,9 @@ body {
 
 .donation{
   justify-self: center;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
   margin: 0px;
 }
 
@@ -812,6 +815,13 @@ input:checked+.slider:before {
     flex-shrink: 100;
     margin-top: 2px;
   }
+  .sidebar {
+    margin-left: 20px;
+  }
+  .donation{
+    margin-left: 20px;
+  }
+
 }
 
 @media (max-width: 350px){
