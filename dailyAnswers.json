@@ -158,5 +158,75 @@
         },
         "locationName": "Los Alamos, New Mexico",
         "inventor": "Robert Oppenheimer"
+    },
+    "02/09/2025": {
+        "invention": "The television",
+        "year": 1926,
+        "location": {
+            "lat": 51.51,
+            "lng": -0.13
+        },
+        "locationName": "London, England",
+        "inventor": "John Logie Baird"
+    },
+    "03/09/2025": {
+        "invention": "The smartphone",
+        "year": 1994,
+        "location": {
+            "lat": 26.42,
+            "lng": -80.10
+        },
+        "locationName": "Miami, Florida",
+        "inventor": "Frank Canova"
+    },
+    "04/09/2025": {
+        "invention": "The camera",
+        "year": 1816,
+        "location": {
+            "lat": 46.72,
+            "lng": 4.86
+        },
+        "locationName": "Burgundy, France",
+        "inventor": "Joseph Niepce"
+    },
+    "05/09/2025": {
+        "invention": "The airplane",
+        "year": 1903,
+        "location": {
+            "lat": 36.01,
+            "lng": -75.67
+        },
+        "locationName": "Kill Devil Hills, North Carolina",
+        "inventor": "Wright Brothers"
+    },
+    "06/09/2025": {
+        "invention": "Paper",
+        "year": 105,
+        "location": {
+            "lat": 26.42,
+            "lng": 112.86
+        },
+        "locationName": "Lei-Yang, China",
+        "inventor": "Ts'ai Lun"
+    },
+    "07/09/2025": {
+        "invention": "The printing press",
+        "year": 1440,
+        "location": {
+            "lat": 50.00,
+            "lng": 8.25
+        },
+        "locationName": "Mainz, Germany",
+        "inventor": "Johannes Gutenberg"
+    },
+    "08/09/2025": {
+        "invention": "The battery",
+        "year": 1800,
+        "location": {
+            "lat": 45.81,
+            "lng": 9.08
+        },
+        "locationName": "Como, Italy",
+        "inventor": "Alessandro Volta"
     }
 }
