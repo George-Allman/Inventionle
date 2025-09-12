@@ -228,5 +228,125 @@
         },
         "locationName": "Como, Italy",
         "inventor": "Alessandro Volta"
+    },
+    "09/09/2025": {
+        "invention": "Pasteurization",
+        "year": 1864,
+        "location": {
+            "lat": 50.64,
+            "lng": 3.08
+        },
+        "locationName": "Lille, France",
+        "inventor": "Louis Pasteur"
+    },
+    "10/09/2025": {
+        "invention": "The Telegraph",
+        "year": 1837,
+        "location": {
+            "lat": 40.73,
+            "lng": -74
+        },
+        "locationName": "New York, USA",
+        "inventor": "Samuel Morse"
+    },
+    "11/09/2025": {
+        "invention": "The submarine",
+        "year": 1620,
+        "location": {
+            "lat": 51.51,
+            "lng": -0.13
+        },
+        "locationName": "London, England",
+        "inventor": "Cornelius Drebbel"
+    },
+    "12/09/2025": {
+        "invention": "The Typewriter",
+        "year": 1868,
+        "location": {
+            "lat": 43.04,
+            "lng": -87.93
+        },
+        "locationName": "Milwaukee, Wisconsin",
+        "inventor": "Christopher Sholes"
+    },
+    "13/09/2025": {
+        "invention": "The Transistor",
+        "year": 1947,
+        "location": {
+            "lat": 40.68,
+            "lng": -74.4
+        },
+        "locationName": "Newark, New Jersey",
+        "inventor": "John Bardeen"
+    },
+    "14/09/2025": {
+        "invention": "The Credit Card",
+        "year": 1950,
+        "location": {
+            "lat": 40.75,
+            "lng": -73.99
+        },
+        "locationName": "New York, USA",
+        "inventor": "Frank McNamara"
+    },
+    "15/09/2025": {
+        "invention": "Helicopter",
+        "year": 1939,
+        "location": {
+            "lat": 41.17,
+            "lng": -73.13
+        },
+        "locationName": "Stratford, Conneticut",
+        "inventor": "Igor Sikorsky"
+    },
+    "16/09/2025": {
+        "invention": "The Microwave Oven",
+        "year": 1945,
+        "location": {
+            "lat": 42.36,
+            "lng": -71.10
+        },
+        "locationName": "Boston, Massachusetts",
+        "inventor": "Percy Spencer"
+    },
+    "17/09/2025": {
+        "invention": "The Nuclear Reactor",
+        "year": 1942,
+        "location": {
+            "lat": 41.79,
+            "lng": -87.60
+        },
+        "locationName": "Chicago, USA",
+        "inventor": "Enrico Fermi"
+    },
+    "18/09/2025": {
+        "invention": "The Sewing Machine",
+        "year": 1846,
+        "location": {
+            "lat": 42.36,
+            "lng": -71.06
+        },
+        "locationName": "Boston, Massachusetts",
+        "inventor": "Elias Howe"
+    },
+    "19/09/2025": {
+        "invention": "The Vacuum Tube",
+        "year": 1904,
+        "location": {
+            "lat": 51.51,
+            "lng": -0.13
+        },
+        "locationName": "London, England",
+        "inventor": "John Flemming"
+    },
+    "20/09/2025": {
+        "invention": "The Capacitor",
+        "year": 1745,
+        "location": {
+            "lat": 52.16,
+            "lng": -4.48
+        },
+        "locationName": "Leiden, Netherlands",
+        "inventor": "Pieter Musschenbroek"
     }
 }
