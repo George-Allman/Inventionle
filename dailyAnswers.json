@@ -1,6 +1,6 @@
 {
     "17/08/2025": {
-        "invention": "The telephone",
+        "invention": "The Telephone",
         "year": 1876,
         "location": {
             "lat": 42.35,
@@ -10,7 +10,7 @@
         "inventor": "Alexander Graham Bell"
     },
     "18/08/2025": {
-        "invention": "The light bulb",
+        "invention": "The Light Bulb",
         "year": 1879,
         "location": {
             "lat": 40.56,
@@ -20,7 +20,7 @@
         "inventor": "Thomas Edison"
     },
     "19/08/2025": {
-        "invention": "The steam engine",
+        "invention": "The Steam Engine",
         "year": 1698,
         "location": {
             "lat": 50.39,
@@ -130,7 +130,7 @@
         "inventor": "Alexander Fleming"
     },
     "30/08/2025": {
-        "invention": "The telescope",
+        "invention": "The Telescope",
         "year": 1608,
         "location": {
             "lat": 51.50,
@@ -140,7 +140,7 @@
         "inventor": "Hans Lippershey"
     },
     "31/08/2025": {
-        "invention": "Nitrogen fixation",
+        "invention": "Nitrogen Fixation",
         "year": 1909,
         "location": {
             "lat": 49.01,
@@ -150,7 +150,7 @@
         "inventor": "Fritz Haber"
     },
     "01/09/2025": {
-        "invention": "The atomic bomb",
+        "invention": "The Atomic Bomb",
         "year": 1945,
         "location": {
             "lat": 35.88,
@@ -160,7 +160,7 @@
         "inventor": "Robert Oppenheimer"
     },
     "02/09/2025": {
-        "invention": "The television",
+        "invention": "The Television",
         "year": 1926,
         "location": {
             "lat": 51.51,
@@ -170,7 +170,7 @@
         "inventor": "John Logie Baird"
     },
     "03/09/2025": {
-        "invention": "The smartphone",
+        "invention": "The Smartphone",
         "year": 1994,
         "location": {
             "lat": 26.42,
@@ -180,7 +180,7 @@
         "inventor": "Frank Canova"
     },
     "04/09/2025": {
-        "invention": "The camera",
+        "invention": "The Camera",
         "year": 1816,
         "location": {
             "lat": 46.72,
@@ -190,7 +190,7 @@
         "inventor": "Joseph Niepce"
     },
     "05/09/2025": {
-        "invention": "The airplane",
+        "invention": "The Airplane",
         "year": 1903,
         "location": {
             "lat": 36.01,
@@ -210,7 +210,7 @@
         "inventor": "Ts'ai Lun"
     },
     "07/09/2025": {
-        "invention": "The printing press",
+        "invention": "The Printing Press",
         "year": 1440,
         "location": {
             "lat": 50.00,
@@ -220,7 +220,7 @@
         "inventor": "Johannes Gutenberg"
     },
     "08/09/2025": {
-        "invention": "The battery",
+        "invention": "The Battery",
         "year": 1800,
         "location": {
             "lat": 45.81,
@@ -250,7 +250,7 @@
         "inventor": "Samuel Morse"
     },
     "11/09/2025": {
-        "invention": "The submarine",
+        "invention": "The Submarine",
         "year": 1620,
         "location": {
             "lat": 51.51,
