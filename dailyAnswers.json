@@ -290,7 +290,7 @@
         "inventor": "Frank McNamara"
     },
     "15/09/2025": {
-        "invention": "Helicopter",
+        "invention": "The Helicopter",
         "year": 1939,
         "location": {
             "lat": 41.17,
@@ -344,9 +344,69 @@
         "year": 1745,
         "location": {
             "lat": 52.16,
-            "lng": -4.48
+            "lng": 4.46
         },
         "locationName": "Leiden, Netherlands",
         "inventor": "Pieter Musschenbroek"
+    },
+    "21/09/2025": {
+        "invention": "The Zipper",
+        "year": 1913,
+        "location": {
+            "lat": 40.73,
+            "lng": -74.03
+        },
+        "locationName": "Jersey City, USA",
+        "inventor": "Gideon Sundbäck"
+    },
+    "22/09/2025": {
+        "invention": "The Elevator",
+        "year": 1853,
+        "location": {
+            "lat": 40.96,
+            "lng": -73.88
+        },
+        "locationName": "Yonkers, New York",
+        "inventor": "Elisha Otis"
+    },
+    "23/09/2025": {
+        "invention": "The X-ray Machine",
+        "year": 1895,
+        "location": {
+            "lat": 49.79,
+            "lng": 9.94
+        },
+        "locationName": "Wurzburg, Germany",
+        "inventor": "William, Rontgen"
+    },
+    "24/09/2025": {
+        "invention": "The Ballpoint Pen",
+        "year": 1938,
+        "location": {
+            "lat": 47.43,
+            "lng": 19.02
+        },
+        "locationName": "Budapest, Hungary",
+        "inventor": "Laszlo"
+    },
+    "26/09/2025": {
+        "invention": "The Vacuum Cleaner",
+        "year": 1901,
+        "location": {
+            "lat": 51.51,
+            "lng": -0.13
+        },
+        "locationName": "London, England",
+        "inventor": "Cecil Booth"
+    },
+    "27/09/2025": {
+        "invention": "The Revolver",
+        "year": 1836,
+        "location": {
+            "lat": 41.77,
+            "lng": -72.67
+        },
+        "locationName": "Hartford, Connecticut",
+        "inventor": "Samuel Colt"
     }
 }
