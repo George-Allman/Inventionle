@@ -389,6 +389,16 @@
         "locationName": "Budapest, Hungary",
         "inventor": "Laszlo Biro"
     },
+    "25/09/2025": {
+        "invention": "The Laser",
+        "year": 1960,
+        "location": {
+            "lat": 34.04,
+            "lng": -118.7
+        },
+        "locationName": "Malibu, California",
+        "inventor": "Theodore Maiman"
+    },
     "26/09/2025": {
         "invention": "The Vacuum Cleaner",
         "year": 1901,
@@ -408,5 +418,115 @@
         },
         "locationName": "Hartford, Connecticut",
         "inventor": "Samuel Colt"
+    },
+    "28/09/2025": {
+        "invention": "The Barcode",
+        "year": 1949,
+        "location": {
+            "lat": 39.96,
+            "lng": -75.6
+        },
+        "locationName": "Philadelphia, Pennsylvania",
+        "inventor": "Norman Woodland"
+    },
+    "29/09/2025": {
+        "invention": "The Refrigerator",
+        "year": 1834,
+        "location": {
+            "lat": 51.51,
+            "lng": -0.13
+        },
+        "locationName": "London, England",
+        "inventor": "Jacob Perkins"
+    },
+    "30/09/2025": {
+        "invention": "The Air Conditioner",
+        "year": 1902,
+        "location": {
+            "lat": 40.67,
+            "lng": -73.95
+        },
+        "locationName": "New York, USA",
+        "inventor": "Willis Carrier"
+    },
+    "01/10/2025": {
+        "invention": "The MRI",
+        "year": 1977,
+        "location": {
+            "lat": 40.76,
+            "lng": -73.95
+        },
+        "locationName": "New York, USA",
+        "inventor": "Raymond Damadian"
+    },
+    "02/10/2025": {
+        "invention": "The 3D Printer",
+        "year": 1984,
+        "location": {
+            "lat": 34.42,
+            "lng": -118.56
+        },
+        "locationName": "Valencia, California",
+        "inventor": "Chuck Hull"
+    },
+    "03/10/2025": {
+        "invention": "The Electric Guitar",
+        "year": 1931,
+        "location": {
+            "lat": 33.74,
+            "lng": -118.29
+        },
+        "locationName": "Los Angeles, California",
+        "inventor": "George Beauchamp"
+    },
+    "04/10/2025": {
+        "invention": "The Touchscreen",
+        "year": 1965,
+        "location": {
+            "lat": 52.12,
+            "lng": -2.32
+        },
+        "locationName": "Malvern, England",
+        "inventor": "Eric Johnson"
+    },
+    "05/10/2025": {
+        "invention": "The Microscope",
+        "year": 1590,
+        "location": {
+            "lat": 51.5,
+            "lng": 3.61
+        },
+        "locationName": "Middelburg, Netherlands",
+        "inventor": "Hans Janssen"
+    },
+    "06/10/2025": {
+        "invention": "The Thermometer",
+        "year": 1593,
+        "location": {
+            "lat": 43.77,
+            "lng": 11.26
+        },
+        "locationName": "Florence, Italy",
+        "inventor": "Galileo Galilei"
+    },
+    "07/10/2025": {
+        "invention": "GPS",
+        "year": 1978,
+        "location": {
+            "lat": 38.88,
+            "lng": -77.1
+        },
+        "locationName": "Arlington, Virginia",
+        "inventor": "Roger Easton"
+    },
+    "08/10/2025": {
+        "invention": "The Mechanical Calculator",
+        "year": 1642,
+        "location": {
+            "lat": 49.44,
+            "lng": 1.10
+        },
+        "locationName": "Rouen, France",
+        "inventor": "Blaise Pascal"
     }
 }
