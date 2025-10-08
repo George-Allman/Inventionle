@@ -528,5 +528,55 @@
         },
         "locationName": "Rouen, France",
         "inventor": "Blaise Pascal"
+    },
+    "09/10/2025": {
+        "invention": "The Rocket",
+        "year": 1926,
+        "location": {
+            "lat": 42.2,
+            "lng": -71.83
+        },
+        "locationName": "Auburn, Massachusetts",
+        "inventor": "Robert Godard"
+    },
+    "10/10/2025": {
+        "invention": "Vaccines",
+        "year": 1796,
+        "location": {
+            "lat": 51.69,
+            "lng": -2.46
+        },
+        "locationName": "Gloucestershire, England",
+        "inventor": "Edward Jenner"
+    },
+    "11/10/2025": {
+        "invention": "The Electric Motor",
+        "year": 1821,
+        "location": {
+            "lat": 51.51,
+            "lng": -0.14
+        },
+        "locationName": "London, England",
+        "inventor": "Michael Faraday"
+    },
+    "12/10/2025": {
+        "invention": "The Barometer",
+        "year": 1643,
+        "location": {
+            "lat": 43.77,
+            "lng": 11.26
+        },
+        "locationName": "Florence, Italy",
+        "inventor": "Evangelista Torricelli"
+    },
+    "13/10/2025": {
+        "invention": "CRISPR",
+        "year": 2012,
+        "location": {
+            "lat": 37.87,
+            "lng": -122.26
+        },
+        "locationName": "Berkeley, California",
+        "inventor": "Jennifer Doudna"
     }
 }
