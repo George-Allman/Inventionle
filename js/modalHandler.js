@@ -50,7 +50,7 @@ function showModal(modalId) {
       const avg = document.getElementById("avg-stat");
       //const streak = document.getElementById("streak-stat");
 
-      let nPlayed = localStorage.length - 1;
+      let nPlayed = localStorage.length - 2;
       let winCount = 0;
       let scoreSum = 0;
       const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Matches YYYY-MM-DD

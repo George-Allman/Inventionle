@@ -5,6 +5,22 @@ const pastGamesBtn = document.getElementById("sidebar-header")
 const sidebarBody = document.getElementById("sidebar-body");
 let currentDate
 
+const CURRENT_SAVE_VERSION = "2.0";
+const VERSION_KEY = "inventionle_save_version";
+
+function resetIfOutdated() {
+    const savedVersion = localStorage.getItem(VERSION_KEY);
+
+    if (savedVersion !== CURRENT_SAVE_VERSION) {
+        localStorage.clear();
+        localStorage.setItem(VERSION_KEY, CURRENT_SAVE_VERSION);
+        console.log("Storage Reset");
+        console.log("Version Updated to", VERSION_KEY)
+    }
+}
+
+resetIfOutdated();
+
 window.addEventListener("DOMContentLoaded", () => {
   const mainMap = initMap('map');
   resultMap = initMap('result-map'); // Save resultMap reference
