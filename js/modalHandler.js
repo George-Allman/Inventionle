@@ -61,7 +61,7 @@ function showModal(modalId) {
 
         try {
           const entry = JSON.parse(value);
-          if (entry) {
+          if (entry && key != "theme" && key != "version") {
             if (entry.win) {
               winCount++
             }
@@ -76,10 +76,20 @@ function showModal(modalId) {
       // ✅ Handle divide by zero
       const winPct = Math.round((winCount / nPlayed) * 100)
       const avgScore = Math.round(scoreSum/nPlayed)
+      console.log(winCount)
+      console.log(avgScore)
+      console.log(scoreSum)
+      if(nPlayed != 0){
+        avg.textContent = avgScore;
+        win.textContent = winPct;
+        played.textContent = nPlayed;
+      }
+      else{
+        avg.textContent = "0";
+        win.textContent = "0";
+        played.textContent = "0";
+      }
 
-      avg.textContent = avgScore;
-      win.textContent = winPct;
-      played.textContent = nPlayed;
       //streak.textContent = localStorage.getItem("currentStreak") || 0;
     }
   }
