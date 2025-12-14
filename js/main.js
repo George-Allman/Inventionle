@@ -5,6 +5,7 @@ const pastGamesBtn = document.getElementById("sidebar-header")
 const sidebarBody = document.getElementById("sidebar-body");
 let currentDate
 
+//Test
 const CURRENT_SAVE_VERSION = "2.0";
 const VERSION_KEY = "inventionle_save_version";
 
